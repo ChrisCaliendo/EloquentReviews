@@ -3,5 +3,4 @@ const Specifics = () => {
         <div></div>
     );
 }
- 
 export default Specifics;

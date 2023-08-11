@@ -20,7 +20,7 @@ const Home = () => {
             <br />
             <br />
             <div className="container flex items-center justify-between mx-auto flex-col md:flex-row">
-                <dir className="px-3 py-2 text-white">
+                <dir className="px-3 py-2 text-white ">
                     Find funny quotes for games on steam
                 </dir>
             </div>
