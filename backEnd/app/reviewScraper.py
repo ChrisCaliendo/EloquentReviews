@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 mostPlayedURL = "https://store.steampowered.com/charts/mostplayed/"
 topSellingURL = "https://store.steampowered.com/charts/topselling/US"
-gameUrl = "https://store.steampowered.com/app/your_game_id/reviews/"
+gameUrl = "none"
 
 def getTSFunnyReview():
     gameUrl = findGame(topSellingURL)
