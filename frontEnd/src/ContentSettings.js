@@ -41,7 +41,7 @@ const ContentSettings = () => {
                 <input id="default-range" type="range" value="50" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"/>
 
             
-            <form action="POST" action="/settings">
+            <form method="POST" action="/settings">
                 <button type="submit"> Apply Setting Changes</button>
             </form>
         </div>

@@ -5,6 +5,7 @@ import { getAuth, signInAnonymously , onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, set, onDisconnect, onValue, onChildAdded } from "firebase/database";
 
 import Home from './Home';
+import ContentSettings from "./ContentSettings";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
@@ -29,10 +30,11 @@ const database = getDatabase();
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Home/>
-        
-      </header>
+      <Routes>
+        <Route exact path="/" element={<Home />}/>
+        <Route path="/settings" element={<ContentSettings />}/>
+        <Route path="*" element={<Home />} />// Make Not Found Element Later
+      </Routes>
     </div>
   );
 }
