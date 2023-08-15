@@ -1,5 +1,24 @@
+import { useState } from 'react';
+import { useEffect } from 'react';
 import logo from './resources/EloquentReviews.png';
 const Home = () => {
+
+    const [message, setMessage] = useState('');
+    const getMessage = async() => {
+        const response = await fetch(`http://localhost:5000/scrape`)
+        const json = await response.json()
+            console.log(json);
+            if (response.ok){
+                console.log(json);
+                setMessage(json.message)
+            }
+    }
+
+
+    useEffect(() => {
+        getMessage();
+    }, [])
+
     return (  
         <div className="home">
             <nav className="container flex items-center justify-between mx-auto">
@@ -20,9 +39,9 @@ const Home = () => {
             <br />
             <br />
             <div className="container flex items-center justify-between mx-auto flex-col md:flex-row">
-                <dir className="px-3 py-2 text-white ">
-                    Find funny quotes for games on steam
-                </dir>
+                <div className="px-3 py-2 text-white ">
+                    {message !== '' && message}
+                </div>
             </div>
         </div>
     );
