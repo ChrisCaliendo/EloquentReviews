@@ -32,15 +32,15 @@ const Home = () => {
                 </ul>
             </div>
             <div className="flex space-x-4">
-                <a href="#" className="px-4 py-2 font-bold text-gray-700 bg-white rounded hover:bg-gray-300">Generate Quote</a>
-                <a href="#" className="px-4 py-2 font-bold text-gray-700 bg-white rounded hover:bg-gray-300">Download Quote</a>
+                <button href="#" className="px-4 py-2 font-bold text-gray-700 bg-white rounded hover:bg-gray-300">Generate Quote</button>
+                <button href="#" className="px-4 py-2 font-bold text-gray-700 bg-white rounded hover:bg-gray-300">Download Quote</button>
             </div>
             </nav>
             <br />
             <br />
             <div className="container flex items-center justify-between mx-auto flex-col md:flex-row">
                 <div className="px-3 py-2 text-white ">
-                    {message !== '' && message}
+                    { message !== '' && message}
                 </div>
             </div>
         </div>
