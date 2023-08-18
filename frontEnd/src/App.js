@@ -1,11 +1,6 @@
 
-import { initializeApp } from "firebase/app";
-import { Link } from "react-router-dom";
-import { getAnalytics } from "firebase/analytics";
-import { getAuth, signInAnonymously , onAuthStateChanged } from "firebase/auth";
-import { getDatabase, ref, set, onDisconnect, onValue, onChildAdded } from "firebase/database";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Home';
 import ContentSettings from "./ContentSettings";
 import NotFound from "./NotFound";

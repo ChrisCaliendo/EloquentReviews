@@ -1,19 +1,20 @@
 import requests
 import random
 from bs4 import BeautifulSoup
+from flask import Blueprint, request, jsonify
 
-mostPlayedURL = "https://store.steampowered.com/charts/mostplayed/"
-topSellingURL = "https://store.steampowered.com/charts/topselling/US"
+searchTerm = ""
 gameUrl = "none"
 
-def getTSFunnyReview():
-    gameUrl = findGame(topSellingURL)
-    getReviews(gameUrl)
-    return "help"
+def getFunnyReview():
+    #gameUrl = findGame(topSellingURL)
+    ex = search_and_scrape(searchTerm)
+    data = getReviews(ex)
+    
+    return data
 
-def geMPFunnyReview():
-    gameUrl = findGame(mostPlayedURL)
-    getReviews(gameUrl)
+def changeSearchTerm(newTerm):
+    searchTerm = newTerm
     return
 
 def getSameGameReview():
@@ -24,24 +25,60 @@ def findGame(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
     #note: thios code literally only works with top selling
-    games = soup.find_all("a", class_="weeklytopsellers_TopChartItem_2C5PJ")
-    randomNumber =  random.randrange(0, len(games)-1)
-    parent = games[randomNumber].parent
-    gameUrl = parent.find("href")
-    return gameUrl
+    subElement = soup.find("div", attrs={'data-featuretarget':'react-root'})
+    games = subElement.find_all("div", attrs={'class':'steamchartsshell_SteamChartsShell_2rArj'})
+    
+    #randomNumber =  random.randrange(0,len(games),1)
+    #print(randomNumber, "but")
+    #parent = games[randomNumber].parent
+    #gameUrl = parent.find("href")
+    newGameUrl = len(games)
+    return subElement
 
 def getReviews(url):
-    response = requests.get(gameUrl)
-    soup = BeautifulSoup(response.content, "html.parser")
+    for x in range(1, 99):
+        offset = (x*10) - 10
 
-    reviews = soup.find_all("div", class_="review_box")
-    randomNumber =  random.randrange(0, len(games)-1)
-    reviews[randomNumber]
-    for review in reviews:
-        review_text = review.find("div", class_="review_text").get_text()
-        rating = review.find("div", class_="review_score").get_text()
-        username = review.find("div", class_="username").get_text()
-        # Extract and store the data as needed
+        payload = {
+        'userreviewsoffset': offset,
+        'p': x,
+        'workshopitemspage': x,
+        'readytouseitemspage': x,
+        'mtxitemspage': x,
+        'itemspage': x,
+        'screenshotspage': x,
+        'videospage': x,
+        'artpage': x,
+        'allguidepage': x,
+        'webguidepage': x,
+        'integratedguidepage': x,
+        'discussionspage': x,
+        'numperpage': '10',
+        'browsefilter': 'toprated',
+        'browsefilter': 'toprated',
+        'l': 'english',
+        'appHubSubSection': '10',
+        'filterLanguage': 'default',
+        'searchText': '',
+        'forceanon': '1'}
+    cookies = {'birthtime': '568022401'}
+    response = requests.get(url, cookies=cookies, params=payload)
+    soup = BeautifulSoup(response.content, "html.parser")
+    gameTitle = soup.find("div", class_="apphub_AppName").text
+    gameImage = soup.find("img", class_="game_header_image_full")['src']
+    cards = soup.find_all('div',{'class':'review_box'})
+    #reviews = soup.find_all("div", class_="review_box")
+    #randomNumber =  random.randrange(0, len(reviews)-1)
+    #reviews[randomNumber]
+
+    return jsonify(
+    {
+        'title': gameTitle,
+        'picture': gameImage,
+        'review': len(cards),
+        'gameUrl': url
+    })
+    
 
 def search_and_scrape(game_name):
     base_url = "https://store.steampowered.com/search/?term="
@@ -65,6 +102,7 @@ def search_and_scrape(game_name):
         # Modify this part to scrape the specific information you need
         print("Game Title:", game_title)
         print("Game URL:", game_url)
+        return game_url
         # Extract other information from game_soup
 
 
