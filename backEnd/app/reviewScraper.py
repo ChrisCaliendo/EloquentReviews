@@ -1,5 +1,6 @@
 import requests
 import random
+import datetime
 from bs4 import BeautifulSoup
 from flask import Blueprint, request, jsonify
 
@@ -36,48 +37,49 @@ def findGame(url):
     return subElement
 
 def getReviews(url):
-    for x in range(1, 99):
-        offset = (x*10) - 10
-
-        payload = {
-        'userreviewsoffset': offset,
-        'p': x,
-        'workshopitemspage': x,
-        'readytouseitemspage': x,
-        'mtxitemspage': x,
-        'itemspage': x,
-        'screenshotspage': x,
-        'videospage': x,
-        'artpage': x,
-        'allguidepage': x,
-        'webguidepage': x,
-        'integratedguidepage': x,
-        'discussionspage': x,
-        'numperpage': '10',
-        'browsefilter': 'toprated',
-        'browsefilter': 'toprated',
-        'l': 'english',
-        'appHubSubSection': '10',
-        'filterLanguage': 'default',
-        'searchText': '',
-        'forceanon': '1'}
     cookies = {'birthtime': '568022401'}
-    response = requests.get(url, cookies=cookies, params=payload)
+    response = requests.get(url, cookies=cookies)
     soup = BeautifulSoup(response.content, "html.parser")
     gameTitle = soup.find("div", class_="apphub_AppName").text
     gameImage = soup.find("img", class_="game_header_image_full")['src']
-    cards = soup.find_all('div',{'class':'review_box'})
-    #reviews = soup.find_all("div", class_="review_box")
-    #randomNumber =  random.randrange(0, len(reviews)-1)
-    #reviews[randomNumber]
+    temp = url.split('/')
+    gameCode = temp[4]
+    funnyReviewSite = "https://steamcommunity.com/app/"+gameCode+"/reviews/?browsefilter=funny&snr=1_5_100010_&p=1"
+    response = requests.get(funnyReviewSite, cookies=cookies)
+    soup = BeautifulSoup(response.content, "html.parser")
+    allReviews = soup.find_all("div", class_="apphub_Card modalContentLink interactable")
+    randomNumber =  random.randrange(0, len(allReviews)-1)
+    #print(allReviews[randomNumber].find("div", class_="apphub_CardTextContent"))
 
-    return jsonify(
-    {
+    #Getting review date
+    reviewData = allReviews[randomNumber]
+    review = reviewData.find("div", class_="apphub_CardTextContent")
+    reviewDate = review.find("div", class_="date_posted").text[8:]
+    if reviewDate[len(reviewDate)-3] == ' '  or reviewDate[len(reviewDate)-2] == ' ': 
+        reviewDate = reviewDate+", "+str(datetime.date.today().year)
+
+    #Getting review text
+    reviewText = ""
+    for element in review:
+        if element.name != "div":
+            reviewText += element.text
+
+    #Getting authors name
+    
+    author = reviewData.find("div", class_="apphub_CardContentAuthorName offline ellipsis").text
+    print(reviewData)
+
+    data = {
         'title': gameTitle,
         'picture': gameImage,
-        'review': len(cards),
+        'numOfReview': len(allReviews),
+        'reviewDate' : reviewDate,
+        'review': str(reviewText),
+        'author': author,
         'gameUrl': url
-    })
+    }
+    
+    return data
     
 
 def search_and_scrape(game_name):
@@ -100,8 +102,6 @@ def search_and_scrape(game_name):
         
         # Extract and print information from the game page
         # Modify this part to scrape the specific information you need
-        print("Game Title:", game_title)
-        print("Game URL:", game_url)
         return game_url
         # Extract other information from game_soup
 

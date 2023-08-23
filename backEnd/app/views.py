@@ -8,7 +8,7 @@ views = Blueprint('view', __name__)
 @views.route('/scrape')
 def scrape():
     data = getFunnyReview()
-    return data
+    return jsonify(data)
 
 
 
