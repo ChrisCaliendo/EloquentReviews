@@ -7,10 +7,10 @@ from flask import Blueprint, request, jsonify
 searchTerm = ""
 gameUrl = "none"
 
-def getFunnyReview():
+def getRandomReview():
     #gameUrl = findGame(topSellingURL)
-    ex = search_and_scrape(searchTerm)
-    data = getReviews(ex)
+    gameUrl = releventSearch(searchTerm)
+    data = getReviews(gameUrl)
     
     return data
 
@@ -18,9 +18,9 @@ def changeSearchTerm(newTerm):
     searchTerm = newTerm
     return
 
-def getSameGameReview():
-    getReviews(gameUrl)
-    return
+def getSimilarReview():
+    data = getReviews(gameUrl)
+    return data
 
 def findGame(url):
     response = requests.get(url)
@@ -67,7 +67,7 @@ def getReviews(url):
     #Getting authors name
     
     author = reviewData.find("div", class_="apphub_CardContentAuthorName offline ellipsis").text
-    print(reviewData)
+    #print(reviewData)
 
     data = {
         'title': gameTitle,
@@ -82,7 +82,7 @@ def getReviews(url):
     return data
     
 
-def search_and_scrape(game_name):
+def releventSearch(game_name):
     base_url = "https://store.steampowered.com/search/?term="
     search_url = base_url + game_name
 
@@ -91,7 +91,30 @@ def search_and_scrape(game_name):
 
     # Find game links from search results
     game_links = soup.find_all("a", class_="search_result_row")
+    randomNumber =  random.randrange(0, len(game_links)-1)
+    link = game_links[randomNumber]
+    game_title = link.find("span", class_="title").get_text()
+    game_url = link["href"]
+    
+    # Send request to individual game page
+    game_response = requests.get(game_url)
+    game_soup = BeautifulSoup(game_response.content, "html.parser")
+    
+    # Extract and print information from the game page
+    # Modify this part to scrape the specific information you need
+    return game_url
+    # Extract other information from game_soup
 
+def specificSearch(game_name):
+    base_url = "https://store.steampowered.com/search/?term="
+    search_url = base_url + game_name
+
+    response = requests.get(search_url)
+    soup = BeautifulSoup(response.content, "html.parser")
+
+    # Find game links from search results
+    game_links = soup.find_all("a", class_="search_result_row")
+    #print(len(game_links)+696900000000000)
     for link in game_links:
         game_title = link.find("span", class_="title").get_text()
         game_url = link["href"]
