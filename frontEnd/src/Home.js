@@ -8,6 +8,7 @@ const Home = () => {
     const [date, setDate] = useState('');
     const [author, setAuthor] = useState('');
     const [game, setGame] = useState("");
+    const [gameUrl, setGameUrl] = useState("");
 
     const getBackendData = async() => {
         const response = await fetch(`http://localhost:5000/scrape`)
@@ -20,22 +21,23 @@ const Home = () => {
                 setAuthor(json.author)
                 setGame(json.title)
                 setMessage(json.review)
+                setGameUrl(json.gameUrl)
             }
     }
 
     const sendInfo = async(reviewType) => {
-        const response = await fetch(`http://localhost:5000/scrape`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
+        const requestOptions = {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
-            body: 
-                {
-                    "reviewType": reviewType
-                }
-                //body: JSON.stringify(data)
+            body: JSON.stringify({
+                'reviewType': reviewType,
+                'gameUrl': gameUrl
             })
-            .catch(error => console.log(error));
+        };
+        const response = await fetch(`http://localhost:5000/scrape`, requestOptions);
             const json = await response.json().catch(setError("Please Try Again"));
             if (response.ok){
                 console.log(json);
@@ -44,9 +46,9 @@ const Home = () => {
                 setAuthor(json.author)
                 setGame(json.title)
                 setMessage(json.review)
+                setGameUrl(json.gameUrl)
             }
         
-
     }
 
     const findRandomReview = () => {
@@ -84,8 +86,8 @@ const Home = () => {
             <br />
             <div className="container flex items-center justify-between mx-auto flex-col lg:flex-row ">
                 <div className="border border-white-300 shadow rounded-md p-5 max-w-xl w-full mx-auto px-3 py-2 text-white bg-zinc-900">
-                {message == '' && <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">Processing...</svg>} 
-                {error !== '' && error}
+                {message == '' && <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">Processing...</svg>} 
+                {error != '' && error}
                 <p>
                     { message !== '' && 
                         <div className="whitespace-pre-wrap">

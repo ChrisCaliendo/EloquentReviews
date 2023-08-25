@@ -18,8 +18,8 @@ def changeSearchTerm(newTerm):
     searchTerm = newTerm
     return
 
-def getSimilarReview():
-    data = getReviews(gameUrl)
+def getSimilarReview(similarUrl):
+    data = getReviews(similarUrl)
     return data
 
 def findGame(url):
