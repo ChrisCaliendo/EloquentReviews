@@ -42,6 +42,7 @@ const Home = () => {
             if (response.ok){
                 console.log(json);
                 
+                setError("");
                 setDate(json.reviewDate)
                 setAuthor(json.author)
                 setGame(json.title)
@@ -87,7 +88,7 @@ const Home = () => {
             <div className="container flex items-center justify-between mx-auto flex-col lg:flex-row ">
                 <div className="border border-white-300 shadow rounded-md p-5 max-w-xl w-full mx-auto px-3 py-2 text-white bg-zinc-900">
                 {message == '' && <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">Processing...</svg>} 
-                {error != '' && error}
+                {error !== '' && error}
                 <p>
                     { message !== '' && 
                         <div className="whitespace-pre-wrap">

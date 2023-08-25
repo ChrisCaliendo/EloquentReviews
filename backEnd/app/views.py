@@ -11,14 +11,11 @@ def scrape():
     frontEndData = request.json
     if frontEndData['reviewType'] == "random":
         data = getRandomReview()
-        print("amogus 2")
     elif frontEndData['reviewType'] == "similar":
-        print("amogus 1")
         data = getSimilarReview(frontEndData['gameUrl'])
     else: 
         data = getRandomReview()
-        print(frontEndData['gameUrl']+"amogus")
-        #print("amogus 3")
+    print(data['review'])
     return jsonify(data)
 
 

@@ -65,8 +65,10 @@ def getReviews(url):
             reviewText += element.text
 
     #Getting authors name
-    
-    author = reviewData.find("div", class_="apphub_CardContentAuthorName offline ellipsis").text
+    try:
+        author = reviewData.find("div", class_="apphub_CardContentAuthorName offline ellipsis").text
+    except:
+        author = "an Anonymous Genius"
     #print(reviewData)
 
     data = {
@@ -74,7 +76,7 @@ def getReviews(url):
         'picture': gameImage,
         'numOfReview': len(allReviews),
         'reviewDate' : reviewDate,
-        'review': str(reviewText),
+        'review': str(reviewText).lstrip(),
         'author': author,
         'gameUrl': url
     }
