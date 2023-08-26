@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'eloquent': ['"Yeseva One"', 'cursive']
+        'eloquent': ['Playfair Display']
       },
     },
   },

@@ -70,13 +70,13 @@ def getReviews(url):
     except:
         author = "an Anonymous Genius"
     #print(reviewData)
-
+    print(reviewText)
     data = {
         'title': gameTitle,
         'picture': gameImage,
         'numOfReview': len(allReviews),
         'reviewDate' : reviewDate,
-        'review': str(reviewText).lstrip(),
+        'review': reviewText.lstrip(),
         'author': author,
         'gameUrl': url
     }

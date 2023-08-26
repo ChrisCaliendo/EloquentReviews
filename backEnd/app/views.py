@@ -15,7 +15,7 @@ def scrape():
         data = getSimilarReview(frontEndData['gameUrl'])
     else: 
         data = getRandomReview()
-    print(data['review'])
+    #print(data['review'])
     return jsonify(data)
 
 
