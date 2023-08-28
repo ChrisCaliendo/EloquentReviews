@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import logo from './resources/EloquentReviews.png';
 const Home = () => {
 
+    const backendUrl = `https://eloquent-review-scraper.onrender.com/`//`http://localhost:5000/scrape`
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -12,7 +13,7 @@ const Home = () => {
     const [gameUrl, setGameUrl] = useState("");
 
     const getBackendData = async() => {
-        const response = await fetch(`http://localhost:5000/scrape`)
+        const response = await fetch(backendUrl)
         const json = await response.json()
             console.log(json);
             if (response.ok){
@@ -38,7 +39,7 @@ const Home = () => {
                 'gameUrl': gameUrl
             })
         };
-        const response = await fetch(`http://localhost:5000/scrape`, requestOptions);
+        const response = await fetch(backendUrl, requestOptions);
         const json = await response.json().catch(setError("Please Try Again"));
         if (response.ok)
         {
