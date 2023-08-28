@@ -5,7 +5,7 @@ from flask_cors import CORS
 
 def create_app():
 
-    const config = {
+    config = {
         'ORIGINS': 
         [
             'http://localhost:8080',  # React
