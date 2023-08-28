@@ -4,8 +4,17 @@ from flask_cors import CORS
 
 
 def create_app():
+
+    const config = {
+        'ORIGINS': 
+        [
+            'http://localhost:8080',  # React
+            'http://127.0.0.1:8080',  # React
+        ]
+    }
+
     app = Flask(__name__)
-    CORS(app)
+    CORS(app, resources={ r'/*': {'origins': config['ORIGINS']}}, supports_credentials=True)
 
     from .views import views
 
