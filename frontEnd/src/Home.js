@@ -39,7 +39,7 @@ const Home = () => {
                 'gameUrl': gameUrl
             })
         };
-        const response = await fetch(backendUrl, requestOptions);
+        const response = await fetch(`https://eloquent-review-scraper.onrender.com/`, requestOptions);
         const json = await response.json().catch(setError("Please Try Again"));
         if (response.ok)
         {
