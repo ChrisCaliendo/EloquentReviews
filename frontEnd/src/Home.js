@@ -3,10 +3,7 @@ import { useEffect } from 'react';
 import logo from './resources/EloquentReviews.png';
 const Home = () => {
 
-<<<<<<< Updated upstream
-=======
     const backendUrl = `http://localhost:5000/scrape`//`http://localhost:5000/scrape`//`https://eloquent-review-scraper.onrender.com/scrape`
->>>>>>> Stashed changes
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -16,7 +13,7 @@ const Home = () => {
     const [gameUrl, setGameUrl] = useState("");
 
     const getBackendData = async() => {
-        const response = await fetch(`http://localhost:5000/scrape`)
+        const response = await fetch(backendUrl)
         const json = await response.json()
             console.log(json);
             if (response.ok){
@@ -42,11 +39,7 @@ const Home = () => {
                 'gameUrl': gameUrl
             })
         };
-<<<<<<< Updated upstream
-        const response = await fetch(`http://localhost:5000/scrape`, requestOptions);
-=======
         const response = await fetch(backendUrl, requestOptions);
->>>>>>> Stashed changes
         const json = await response.json().catch(setError("Please Try Again"));
         if (response.ok)
         {
@@ -110,15 +103,15 @@ const Home = () => {
                 } 
                 {error !== '' && error}
                 
-                    { message !== '' && 
-                        <div className="whitespace-pre-wrap">
-                            <p className="font-eloquent">{message}</p>
-                            <br />
-                            <p>A review of {game}</p>
-                            <p>Written by {author}    {date}</p>
-                            <br />
-                        </div>
-                    }
+                { message !== '' && 
+                    <div className="whitespace-pre-wrap">
+                        <p className="font-eloquent">{message}</p>
+                        <br />
+                        <p>A review of {game}</p>
+                        <p>Written by {author}    {date}</p>
+                        <br />
+                    </div>
+                }
                 
                 </div>
             </div>
