@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'eloquent': ['Playfair Display']
+        'eloquent': ['Signika Negative']
       },
     },
   },

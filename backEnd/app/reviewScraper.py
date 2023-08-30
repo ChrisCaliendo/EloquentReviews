@@ -1,6 +1,8 @@
 import requests
+import re
 import random
 import datetime
+from collections import Counter
 from bs4 import BeautifulSoup
 from flask import Blueprint, request, jsonify
 
@@ -63,6 +65,7 @@ def getReviews(url):
     for element in review:
         if element.name != "div":
             reviewText += element.text
+    reviewText = processText(reviewText)
 
     #Getting authors name
     try:
@@ -82,7 +85,47 @@ def getReviews(url):
     }
     
     return data
+
+def processText(text):
     
+    #Tells if text is Green Post
+    isGreenText = False
+    count = 0
+    for i in text:
+        if i == '>':
+            count = count + 1
+    if count >= 5:
+        isGreenText = True
+    
+    
+    #Sifts through each character for special charaacters to fix grammer issues or preffered formatting
+    newText = ""
+    
+    for index in range(len(text)-1):
+        char = text[index]
+        if char == ".":
+            nextChar = text[index+1]
+            if nextChar != '.' and nextChar != ' ' and nextChar != ')' and nextChar.isdigit() == False:
+                newText += char + ' '
+                index += 1
+            else:
+                newText += char 
+        elif isGreenText and char == ">":
+            nextChar = text[index+1]
+            newLineAdded == True
+            if(index >= 2):
+                newLineAdded = newText.endswith('\n')
+            if newLineAdded == False:
+                newText += "\n"
+                index += 1
+            if nextChar != '=' and nextChar != ' ':
+                newText += char + " "
+                index += 1
+            else:
+                newText += char 
+        else: newText += char
+    
+    return newText
 
 def releventSearch(game_name):
     base_url = "https://store.steampowered.com/search/?term="

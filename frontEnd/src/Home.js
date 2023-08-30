@@ -39,6 +39,7 @@ const Home = () => {
                 'gameUrl': gameUrl
             })
         };
+
         const response = await fetch(backendUrl, requestOptions);
         const json = await response.json().catch(setError("Please Try Again"));
         if (response.ok)
@@ -104,8 +105,8 @@ const Home = () => {
                 {error !== '' && error}
                 
                 { message !== '' && 
-                    <div className="whitespace-pre-wrap">
-                        <p className="font-eloquent">{message}</p>
+                    <div className="whitespace-pre-wrap font-eloquent">
+                        <p>{message}</p>
                         <br />
                         <p>A review of {game}</p>
                         <p>Written by {author}    {date}</p>
