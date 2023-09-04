@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Home';
 import ContentSettings from "./ContentSettings";
 import NotFound from "./NotFound";
+import Header from "./Header";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
@@ -26,6 +27,7 @@ function App() {
   return (
     
     <div className="App">
+      <Header/>
       <Router>
         <Routes>
           <Route exact path="/" element={<Home />}/>
