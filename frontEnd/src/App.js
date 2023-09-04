@@ -5,6 +5,8 @@ import Home from './Home';
 import ContentSettings from "./ContentSettings";
 import NotFound from "./NotFound";
 import Header from "./Header";
+import About from './About';
+import DisplaySettings from './DisplaySettings';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
@@ -31,7 +33,9 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Home />}/>
-          <Route path="/settings" element={<ContentSettings />}/>
+          <Route exact path="/about" element={<About />}/>
+          <Route path="/content_settings" element={<ContentSettings />}/>
+          <Route path="/display_settings" element={<DisplaySettings />}/>
           <Route path="*" element={<NotFound/>} />// Make Not Found Element Later
         </Routes>
       </Router>

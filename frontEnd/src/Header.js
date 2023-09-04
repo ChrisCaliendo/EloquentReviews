@@ -8,18 +8,18 @@ const Header = () => {
             <div className="hidden lg:block">
                 <ul className="flex space-x-4">
                 <li>
-                    <a className="px-3 py-2 font-bold text-white hover:text-gray-500">Home</a>
+                    <a href="/" className="px-3 py-2 font-bold text-white hover:text-gray-500">Home</a>
                 </li>
                 <li>
-                    <a href="#" className="px-3 py-2 font-bold text-white hover:text-gray-500">About</a>
+                    <a href="/about" className="px-3 py-2 font-bold text-white hover:text-gray-500">About</a>
                     <span className="bg-indigo-100 text-indigo-800 text-xs font-bold mr-2 px-2 py-0.5 rounded-full dark:bg-indigo-900 dark:text-indigo-300">WIP</span>
                 </li>
                 <li>
-                    <a href="#" className="px-3 py-2 font-bold text-white hover:text-gray-500">Content Settings</a>
+                    <a href="/content_settings" className="px-3 py-2 font-bold text-white hover:text-gray-500">Content Settings</a>
                     <span className="bg-indigo-100 text-indigo-800 text-xs font-bold  mr-2 px-2 py-0.5 rounded-full dark:bg-indigo-900 dark:text-indigo-300">WIP</span>
                 </li>
                 <li>
-                    <a href="#" className="px-3 py-2 font-bold text-white hover:text-gray-500">Specifics</a>
+                    <a href="/display_settings" className="px-3 py-2 font-bold text-white hover:text-gray-500">Display Settings</a>
                     <span className="bg-indigo-100 text-indigo-800 text-xs font-bold mr-2 px-2 py-0.5 rounded-full dark:bg-indigo-900 dark:text-indigo-300">WIP</span>
                 </li>
                 </ul>
