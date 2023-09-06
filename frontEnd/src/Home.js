@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const Home = () => {
+const Home = ({contentConfig}) => {
 
     const backendUrl = `https://eloquent-review-scraper.onrender.com/scrape`//`http://localhost:5000/scrape`//`https://eloquent-review-scraper.onrender.com/scrape`
     const [message, setMessage] = useState('');
@@ -36,7 +36,9 @@ const Home = () => {
             },
             body: JSON.stringify({
                 'reviewType': reviewType,
-                'gameUrl': gameUrl
+                'gameUrl': gameUrl,
+
+
             })
         };
 

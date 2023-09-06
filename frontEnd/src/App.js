@@ -36,7 +36,7 @@ function App() {
       <Header/>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Home contentSettings={contentConfig} displaySettings={displayConfig} />}/>
+          <Route exact path="/" element={<Home contentConfig={contentConfig} displayConfig={displayConfig} />}/>
           <Route exact path="/about" element={<About />}/>
           <Route path="/content_settings" element={<ContentSettings contentConfig={contentConfig} updateCC={updateCC} />}/>
           <Route path="/display_settings" element={<DisplaySettings displayConfig={displayConfig} updateDC={updateDC} />}/>

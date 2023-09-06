@@ -3,7 +3,11 @@ import { useState } from "react";
 
 const ContentSettings = ({ contentConfig, updateCC}) => {
     const [gameType, setGameType] = useState("topSelling")
-    const [reviewLength, setCharLimit] = useState(100) //from 30 to 250
+    const [reviewLength, setCharLimit] = useState(50) //from 30 to 250
+
+    const handleSliderChange = (event) => {
+        setCharLimit(event.target.value);
+    };
     return (  
         <div className="border border-none shadow rounded-md p-5 max-w-3xl w-full mx-auto px-3 py-2 text-white bg-zinc-900 font-semibold">
             
@@ -36,13 +40,15 @@ const ContentSettings = ({ contentConfig, updateCC}) => {
             </ul>
             <br />
 
-                <label for="disabled-range" className="block mb-2 text-sm font-bold text-gray-900 dark:text-white">Review Length</label>
-                <label for="disabled-range" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{reviewLength}</label>
-                <input id="default-range" type="range" value="50" className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"/>
+            <label for="disabled-range" className="block mb-2 text-sm font-bold  text-white">Review Length</label>
+            <label for="disabled-range" className="block mb-2 text-sm font-medium  text-white">{reviewLength}</label>
+            <input id="minmax-range" type="range" min="0" max="100" value={reviewLength} onChange={handleSliderChange} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"/>
 
+            <br />
+            <br />
             
             <form method="POST" action="/settings">
-                <button type="submit"> Apply Setting </button>
+                <button type="submit" className="px-2 py-1 font-bold text-gray-700  bg-white rounded hover:bg-gray-300"> Apply Setting </button>
             </form>
         </div>
     );
