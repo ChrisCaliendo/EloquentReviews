@@ -114,14 +114,14 @@ def processText(text):
                     newText += char 
             case "?":
                 nextChar = text[index+1]
-                if nextChar != '?' and nextChar != ' ' and nextChar != ')' and nextChar.isdigit() == False:
+                if nextChar != '?' and nextChar != '!' and nextChar != ' ' and nextChar != ')':
                     newText += char + ' '
                     index += 1
                 else:
                     newText += char 
             case "!":
                 nextChar = text[index+1]
-                if nextChar != '!' and nextChar != ' ' and nextChar != ')' and nextChar.isdigit() == False:
+                if nextChar != '!' and nextChar != '?' and nextChar != ' ' and nextChar != ')':
                     newText += char + ' '
                     index += 1
                 else:
