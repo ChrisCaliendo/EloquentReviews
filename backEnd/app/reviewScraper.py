@@ -103,27 +103,59 @@ def processText(text):
     
     for index in range(len(text)-1):
         char = text[index]
-        if char == ".":
-            nextChar = text[index+1]
-            if nextChar != '.' and nextChar != ' ' and nextChar != ')' and nextChar.isdigit() == False:
-                newText += char + ' '
-                index += 1
-            else:
-                newText += char 
-        elif isGreenText and char == ">":
-            nextChar = text[index+1]
-            newLineAdded == True
-            if(index >= 2):
-                newLineAdded = newText.endswith('\n')
-            if newLineAdded == False:
-                newText += "\n"
-                index += 1
-            if nextChar != '=' and nextChar != ' ':
-                newText += char + " "
-                index += 1
-            else:
-                newText += char 
-        else: newText += char
+        match char:
+            #if there is a period or sentence ending symbol then a space is checked for and added if needed
+            case ".":
+                nextChar = text[index+1]
+                if nextChar != '.' and nextChar != ' ' and nextChar != ')' and nextChar.isdigit() == False:
+                    newText += char + ' '
+                    index += 1
+                else:
+                    newText += char 
+            case "?":
+                nextChar = text[index+1]
+                if nextChar != '?' and nextChar != ' ' and nextChar != ')' and nextChar.isdigit() == False:
+                    newText += char + ' '
+                    index += 1
+                else:
+                    newText += char 
+            case "!":
+                nextChar = text[index+1]
+                if nextChar != '!' and nextChar != ' ' and nextChar != ')' and nextChar.isdigit() == False:
+                    newText += char + ' '
+                    index += 1
+                else:
+                    newText += char 
+            case ":":
+                nextChar = text[index+1]
+                if nextChar != ':' and nextChar != ' ' and nextChar != ')' and nextChar.isdigit() == False:
+                    newText += char + ' '
+                    index += 1
+                else:
+                    newText += char 
+            case ">":
+                #special case for greentext as > represent new line
+                if isGreenText:
+                    nextChar = text[index+1]
+                    newLineAdded == True
+                    if(index >= 2):
+                        newLineAdded = newText.endswith('\n')
+                    if newLineAdded == False:
+                        newText += "\n"
+                        index += 1
+                    if nextChar != '=' and nextChar != ' ':
+                        newText += char + " "
+                        index += 1
+                    else:
+                        newText += char 
+                else:
+                    nextChar = text[index+1]
+                    if nextChar != ':' and nextChar != ' ' and nextChar != ')' and nextChar.isdigit() == False:
+                        newText += char + ' '
+                        index += 1
+                    else:
+                        newText += char
+            case _: newText += char
     
     return newText
 
