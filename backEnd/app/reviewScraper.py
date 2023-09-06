@@ -107,6 +107,7 @@ def processText(text):
             #if there is a period or sentence ending symbol then a space is checked for and added if needed
             case ".":
                 nextChar = text[index+1]
+                #accounts for digits
                 if nextChar != '.' and nextChar != ' ' and nextChar != ')' and nextChar.isdigit() == False:
                     newText += char + ' '
                     index += 1
