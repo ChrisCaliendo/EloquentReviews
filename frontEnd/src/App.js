@@ -1,6 +1,7 @@
 
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useState } from 'react';
 import Home from './Home';
 import ContentSettings from "./ContentSettings";
 import NotFound from "./NotFound";
@@ -26,16 +27,19 @@ const firebaseConfig = {
 
 
 function App() {
+
+  const [contentConfig, updateCC] = useState();
+  const [displayConfig, updateDC] = useState();
   return (
     
     <div className="App">
       <Header/>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Home />}/>
+          <Route exact path="/" element={<Home contentSettings={contentConfig} displaySettings={displayConfig} />}/>
           <Route exact path="/about" element={<About />}/>
-          <Route path="/content_settings" element={<ContentSettings />}/>
-          <Route path="/display_settings" element={<DisplaySettings />}/>
+          <Route path="/content_settings" element={<ContentSettings contentConfig={contentConfig} updateCC={updateCC} />}/>
+          <Route path="/display_settings" element={<DisplaySettings displayConfig={displayConfig} updateDC={updateDC} />}/>
           <Route path="*" element={<NotFound/>} />// Make Not Found Element Later
         </Routes>
       </Router>

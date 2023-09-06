@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-const ContentSettings = () => {
+const ContentSettings = ({ contentConfig, updateCC}) => {
     const [gameType, setGameType] = useState("topSelling")
     const [reviewLength, setCharLimit] = useState(100) //from 30 to 250
     return (  
