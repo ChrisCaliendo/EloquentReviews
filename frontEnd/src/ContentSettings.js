@@ -5,6 +5,10 @@ const ContentSettings = ({ contentConfig, updateCC}) => {
     const [gameType, setGameType] = useState("topSelling")
     const [reviewLength, setCharLimit] = useState(50) //from 30 to 250
 
+    const applyContentSettings = () => {
+        updateCC(
+        )
+    };
     const handleSliderChange = (event) => {
         setCharLimit(event.target.value);
     };
@@ -47,7 +51,7 @@ const ContentSettings = ({ contentConfig, updateCC}) => {
             <br />
             <br />
             
-            <form method="POST" action="/settings">
+            <form  onSubmit={applyContentSettings}>
                 <button type="submit" className="px-2 py-1 font-bold text-gray-700  bg-white rounded hover:bg-gray-300"> Apply Setting </button>
             </form>
         </div>
