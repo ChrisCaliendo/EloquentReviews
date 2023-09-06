@@ -104,6 +104,7 @@ def processText(text):
     for index in range(len(text)-1):
         char = text[index]
         match char:
+            #if there is a period or sentence ending symbol then a space is checked for and added if needed
             case ".":
                 nextChar = text[index+1]
                 if nextChar != '.' and nextChar != ' ' and nextChar != ')' and nextChar.isdigit() == False:
@@ -133,6 +134,7 @@ def processText(text):
                 else:
                     newText += char 
             case ">":
+                #special case for greentext as > represent new line
                 if isGreenText:
                     nextChar = text[index+1]
                     newLineAdded == True
