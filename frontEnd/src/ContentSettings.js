@@ -1,14 +1,14 @@
 import { useState } from "react";
+//import {useSettingsContext} from '../.'
 
-
-const ContentSettings = ({ contentConfig, updateCC}) => {
+const ContentSettings = () => {
     const [gameType, setGameType] = useState("topSelling")
     const [reviewLength, setCharLimit] = useState(50) //from 30 to 250
 
     const applyContentSettings = () => {
-        updateCC(
-        )
+        
     };
+
     const handleSliderChange = (event) => {
         setCharLimit(event.target.value);
     };

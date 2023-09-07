@@ -65,7 +65,9 @@ def getReviews(url):
     for element in review:
         if element.name != "div":
             reviewText += element.text
-    reviewText = processText(reviewText)
+        elif element.name != "br":
+            reviewText += "\n"
+    #reviewText = processText(reviewText)
 
     #Getting authors name
     try:
@@ -94,8 +96,8 @@ def processText(text):
     for i in text:
         if i == '>':
             count = count + 1
-    if count >= 5:
-        isGreenText = True
+    #if count >= 5:
+        #isGreenText = True
     
     
     #Sifts through each character for special charaacters to fix grammer issues or preffered formatting

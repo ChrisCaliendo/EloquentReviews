@@ -37,9 +37,9 @@ const Home = ({contentConfig}) => {
             body: JSON.stringify({
                 'reviewType': reviewType,
                 'gameUrl': gameUrl,
-                'reviewLength': contentConfig[reviewLength],
-                'lengthType': contentConfig[lengthType],
-                'gameSearchName': contentConfig[gameSearchName]
+                'reviewLength': '',
+                'lengthType': '',
+                'gameSearchName': ''
             })
         };
 
