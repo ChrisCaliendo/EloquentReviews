@@ -1,16 +1,29 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useContentConfig } from "./ContentManagement";
 //import {useSettingsContext} from '../.'
 
 const ContentSettings = () => {
-    const [gameType, setGameType] = useState("topSelling")
-    const [reviewLength, setCharLimit] = useState(50) //from 30 to 250
+
+    const { contentConfig, setContextConfig } = useContentConfig()
+
+    const [useConfig, setUseConfig] = useState(contentConfig.useConfig)
+    const [gameType, setGameType] = useState(contentConfig.gameType)
+    const [reviewLength, setReviewLimit] = useState(contentConfig.reviewLength) //from 30 to 250
+    const [lengthType, setLengthType] = useState(contentConfig.lengthType)
+    const [gameSearchName, setGameSearchName] = useState(contentConfig.gameSearchName)
 
     const applyContentSettings = () => {
-        
+        setContextConfig({
+            useConfig: useConfig,
+            gameType: gameType,
+            reviewLength: reviewLength,
+            lengthType: lengthType,
+            gameSearchName: gameSearchName
+        })
     };
 
     const handleSliderChange = (event) => {
-        setCharLimit(event.target.value);
+        setReviewLimit(event.target.value);
     };
     return (  
         <div className="border border-none shadow rounded-md p-5 max-w-3xl w-full mx-auto px-3 py-2 text-white bg-zinc-900 font-semibold">

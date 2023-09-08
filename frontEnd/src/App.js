@@ -9,6 +9,7 @@ import Header from "./Header";
 import About from './About';
 import DisplaySettings from './DisplaySettings';
 
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 const firebaseConfig = {
@@ -27,15 +28,6 @@ const firebaseConfig = {
 
 
 function App() {
-
-  const [contentConfig, updateCC] = useState(
-    {
-      reviewLength: null,
-      lengthType: null,
-      gameSearchTag: null,
-      "gameSearchName": null
-    }
-  );
   
   return (
     

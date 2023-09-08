@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useContentConfig } from './ContentManagement';
 
-const Home = ({contentConfig}) => {
+const Home = () => {
 
     const backendUrl = `https://eloquent-review-scraper.onrender.com/scrape`//`http://localhost:5000/scrape`//`https://eloquent-review-scraper.onrender.com/scrape`
     const [message, setMessage] = useState('');
@@ -11,6 +12,8 @@ const Home = ({contentConfig}) => {
     const [author, setAuthor] = useState('');
     const [game, setGame] = useState("");
     const [gameUrl, setGameUrl] = useState("");
+
+    const { contentConfig } = useContentConfig()
 
     const getBackendData = async() => {
         const response = await fetch(backendUrl)
@@ -37,9 +40,11 @@ const Home = ({contentConfig}) => {
             body: JSON.stringify({
                 'reviewType': reviewType,
                 'gameUrl': gameUrl,
-                'reviewLength': '',
-                'lengthType': '',
-                'gameSearchName': ''
+                'useConfig': contentConfig.useConfig,
+                'gameType': contentConfig.gameType,
+                'reviewLength': contentConfig.reviewLength,
+                'lengthType': contentConfig.lengthType,
+                'gameSearchName': contentConfig.gameSearchName
             })
         };
 
