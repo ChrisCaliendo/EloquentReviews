@@ -6,7 +6,7 @@ export const ContentManager = ({ children }) => {
     const [contentConfig, setContentConfig] = useState({
 
         useConfig: false,
-        gameType: 'Funny',
+        gameTags: [],
         gameRating: 'Any',
         reviewLength: 50,
         lengthType: ''

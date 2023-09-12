@@ -8,7 +8,7 @@ const ContentSettings = () => {
     const { contentConfig, setContextConfig } = useContentConfig()
 
     const [useConfig, setUseConfig] = useState(contentConfig.useConfig)
-    const [gameType, setGameType] = useState(contentConfig.gameType)
+    const [gameTags, setGameTags] = useState(contentConfig.gameTags)
     const [reviewRating, setRating] = useState(contentConfig.gameRating)
     const [reviewLength, setReviewLimit] = useState(contentConfig.reviewLength) //from 30 to 250
     const [lengthType, setLengthType] = useState(contentConfig.lengthType)
@@ -40,24 +40,35 @@ const ContentSettings = () => {
         console.log(useConfig)
     };
 
+    
+
+    const handleCheckboxChange = (value, isChecked) => {
+        if (isChecked) {
+            setSelectedValues([...selectedValues, value]);
+        } 
+        else {
+            etSelectedValues(gameTags.filter(item => item !== value));
+        }
+    };
+
     return (  
         
         <div className="border border-none shadow rounded-md p-5 max-w-3xl w-full mx-auto px-3 py-2 text-white bg-zinc-900 font-semibold">
             <h3 className="mb-4 font-semibold dark:text-white">What Kind of Games Do You Want To Find?</h3>
             <div onChange={handleTypeChange} className="grid grid-cols-4 gap-4">
                 
-                <SteamTag tagName="Indie" />
-                <SteamTag tagName="Adventure" />
-                <SteamTag tagName="Singleplayer" />
-                <SteamTag tagName="Multiplayer" />
-                <SteamTag tagName="Action" />
-                <SteamTag tagName="Strategy" />
-                <SteamTag tagName="Casual" />
-                <SteamTag tagName="Rougelike" />
-                <SteamTag tagName="Simulation" />
-                <SteamTag tagName="FPS" />
-                <SteamTag tagName="Puzzle" />
-                <SteamTag tagName="Metroidvania" />
+                <SteamTag onChange={handleCheckboxChange} tagName="Indie" />
+                <SteamTag onChange={handleCheckboxChange} tagName="Adventure" />
+                <SteamTag onChange={handleCheckboxChange} tagName="Singleplayer" />
+                <SteamTag onChange={handleCheckboxChange} tagName="Multiplayer" />
+                <SteamTag onChange={handleCheckboxChange} tagName="Action" />
+                <SteamTag onChange={handleCheckboxChange} tagName="Strategy" />
+                <SteamTag onChange={handleCheckboxChange} tagName="Casual" />
+                <SteamTag onChange={handleCheckboxChange} tagName="Rougelike" />
+                <SteamTag onChange={handleCheckboxChange} tagName="Simulation" />
+                <SteamTag onChange={handleCheckboxChange} tagName="FPS" />
+                <SteamTag onChange={handleCheckboxChange} tagName="Puzzle" />
+                <SteamTag onChange={handleCheckboxChange} tagName="Metroidvania" />
                 
             </div>
             <br />
