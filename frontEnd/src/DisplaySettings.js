@@ -1,4 +1,4 @@
-const DisplaySettings = () => {
+const DisplaySettings = ({displayConfig, updateDC}) => {
     return (  
         <div>
             

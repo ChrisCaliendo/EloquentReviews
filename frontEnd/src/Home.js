@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useContentConfig } from './ContentManagement';
 
 const Home = () => {
 
@@ -11,6 +12,9 @@ const Home = () => {
     const [author, setAuthor] = useState('');
     const [game, setGame] = useState("");
     const [gameUrl, setGameUrl] = useState("");
+    const [searchName, setSearchName] = useState("");
+
+    const { contentConfig } = useContentConfig()
 
     const getBackendData = async() => {
         const response = await fetch(backendUrl)
@@ -36,7 +40,12 @@ const Home = () => {
             },
             body: JSON.stringify({
                 'reviewType': reviewType,
-                'gameUrl': gameUrl
+                'gameUrl': gameUrl,
+                'useConfig': contentConfig.useConfig,
+                'gameType': contentConfig.gameType,
+                'reviewLength': contentConfig.reviewLength,
+                'lengthType': contentConfig.lengthType,
+                'searchName': searchName
             })
         };
 
@@ -70,15 +79,33 @@ const Home = () => {
         sendInfo("similar");
     }
 
+    const findSearchReview = () => {
+        setLoading(true)
+        setError("");
+        setMessage("");
+        sendInfo("search");
+    }
 
     return (  
         <div className="home">
             
             <div className="container flex items-center justify-between mx-auto flex-col 2xl:flex-row">
+            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+            
                 <div className="p-5 max-w-2xl w-full mx-auto px-3 py-2 ">
+                    <div class="relative max-w-xl justify-evenly mx-auto">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg class="w-5 h-10 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 10 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </div>
+                        <input type="search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-600 focus:border-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 " placeholder="Enter Name of Game  (( WIP ))" required/>
+                        <br />                
+                    </div>
                     <div className="flex justify-evenly">
-                        <button onClick={findRandomReview} className="px-4 py-2 font-bold text-gray-700  bg-white rounded hover:bg-gray-300">Find Random Review</button>
-                        <button onClick={findSimilarReview} disabled={!game} className="px-4 py-2 font-bold text-gray-700 bg-white rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">Find Similar Review</button>
+                        <button title="Finds Review of Random Game" data-te-placement="top" data-te-toggle="tooltip" onClick={findRandomReview} className="px-4 py-2 font-bold text-gray-700  bg-white rounded hover:bg-gray-300">Find Random Review</button>
+                        <button title="Finds Review From The Same Game as Previous Review" data-te-placement="top" data-te-toggle="tooltip" onClick={findSimilarReview} disabled={!game} className="px-4 py-2 font-bold text-gray-700 bg-white rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">Find Similar Review</button>
+                        <button title="Finds Review From Game Entered in Search" data-te-placement="top" data-te-toggle="tooltip" onClick={findSearchReview} disabled={!game} className="px-4 py-2 font-bold text-gray-700 bg-white rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">Find Search Review</button>
                     </div>
                 <br />
                 <div className="border border-none shadow rounded-md p-5 max-w-2xl w-full mx-auto px-3 py-2 text-white bg-zinc-900">
