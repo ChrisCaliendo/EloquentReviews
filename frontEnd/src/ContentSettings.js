@@ -63,24 +63,24 @@ const ContentSettings = () => {
             <br />
 
             <div onChange={handleRatingChange}>
-                <h3 className="mb-4 font-semibold dark:text-white">What Ratings Are You Interested In?</h3>
+                <h3 className="mb-4 font-semibold">What Ratings Are You Interested In?</h3>
                 <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-xl sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600 accent-gray-900">
                         <div className="flex items-center pl-3">
                             <input id="horizontal-list-radio-license" type="radio" value="Any" name="rating-input" checked={reviewRating === "Any"} className="w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 focus:ring-gray-500 dark:focus:ring-gray-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
-                            <label for="horizontal-list-radio-license" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Any</label>
+                            <label for="horizontal-list-radio-license" className="w-full py-3 ml-2 text-sm font-bold text-gray-900 dark:text-gray-300">Any</label>
                         </div>
                     </li>
-                    <li className="w-full border-b border-gray-200 bg-blue-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                    <li className="w-full border-b border-gray-200 bg-blue-300 sm:border-b-0 sm:border-r dark:border-gray-600">
                         <div className="flex items-center pl-3">
                             <input id="horizontal-list-radio-id" type="radio" value="Positive" name="rating-input" checked={reviewRating === "Positive"} className="w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 focus:ring-gray-500 dark:focus:ring-gray-600 accent-gray-900 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
-                            <label for="horizontal-list-radio-id" className="w-full py-3 ml-2 text-sm font-medium text-gray-900  dark:text-gray-300">Postive</label>
+                            <label for="horizontal-list-radio-id" className="w-full py-3 ml-2 text-sm font-bold text-gray-900  ">Postive</label>
                         </div>
                     </li>
-                    <li className="w-full rounded-r-xl border-b  border-gray-200 bg-red-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                    <li className="w-full rounded-r-xl border-b  border-gray-200 bg-red-300 sm:border-b-0 sm:border-r dark:border-gray-600">
                         <div className="flex items-center pl-3 ">
                             <input id="horizontal-list-radio-millitary" type="radio" value="Negative" name="rating-input" checked={reviewRating === "Negative"} className="w-4 h-4 text-gray-600 bg-gray-100  border-gray-300 focus:ring-gray-500 dark:focus:ring-gray-600 accent-gray-900 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
-                            <label for="horizontal-list-radio-millitary" className="w-full py-3 ml-2 text-sm font-medium text-gray-900 accent-gray-900 dark:text-gray-300">Negative</label>
+                            <label for="horizontal-list-radio-millitary" className="w-full py-3 ml-2 text-sm font-bold text-gray-900 accent-gray-800 ">Negative</label>
                         </div>
                     </li>
                 </ul>
