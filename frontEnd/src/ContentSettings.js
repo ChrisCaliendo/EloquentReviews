@@ -5,7 +5,7 @@ import SteamTag from "./SteamTag";
 
 const ContentSettings = () => {
 
-    const { contentConfig, setContextConfig } = useContentConfig()
+    const { contentConfig, setContentConfig } = useContentConfig()
 
     const [useConfig, setUseConfig] = useState(contentConfig.useConfig)
     const [gameTags, setGameTags] = useState(contentConfig.gameTags)
@@ -14,14 +14,14 @@ const ContentSettings = () => {
     const [lengthType, setLengthType] = useState(contentConfig.lengthType)
 
     const applyContentSettings = () => {
-        console.log("yep")
-        setContextConfig({
+        setContentConfig({
             useConfig: useConfig,
             gameTags: gameTags,
             reviewRating: reviewRating,
             reviewLength: reviewLength,
             lengthType: lengthType
         })
+        console.log(contentConfig);
     };
 
     const handleSliderChange = (event) => {

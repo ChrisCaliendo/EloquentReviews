@@ -11,7 +11,6 @@ export const ContentManager = ({ children }) => {
         reviewLength: 50,
         lengthType: ''
 
-
     })
 
     return( 
