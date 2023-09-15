@@ -9,6 +9,7 @@ views = Blueprint('view', __name__)
 @views.route('/scrape', methods=['POST'])
 def scrape():
     frontEndData = request.json
+    
     if frontEndData['reviewType'] == "random":
         data = getRandomReview()
     elif frontEndData['reviewType'] == "similar":

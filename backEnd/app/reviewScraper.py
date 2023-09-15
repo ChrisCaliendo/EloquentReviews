@@ -6,12 +6,18 @@ from collections import Counter
 from bs4 import BeautifulSoup
 from flask import Blueprint, request, jsonify
 
-searchTerm = ""
 gameUrl = "none"
 
 def getRandomReview():
     #gameUrl = findGame(topSellingURL)
-    gameUrl = releventSearch(searchTerm)
+    gameUrl = releventSearch("", "random")
+    data = getReviews(gameUrl)
+    
+    return data
+
+def getCustomReview(searchTerm):
+    #gameUrl = findGame(topSellingURL)
+    gameUrl = releventSearch(searchTerm, "percise")
     data = getReviews(gameUrl)
     
     return data
@@ -88,81 +94,7 @@ def getReviews(url):
     
     return data
 
-def processText(text):
-    
-    #Tells if text is Green Post
-    isGreenText = False
-    count = 0
-    for i in text:
-        if i == '>':
-            count = count + 1
-    #if count >= 5:
-        #isGreenText = True
-    
-    
-    #Sifts through each character for special charaacters to fix grammer issues or preffered formatting
-    newText = ""
-    
-    for index in range(len(text)-1):
-        char = text[index]
-        match char:
-            #if there is a period or sentence ending symbol then a space is checked for and added if needed
-            case ".":
-                nextChar = text[index+1]
-                #accounts for digits
-                if nextChar != '.' and nextChar != ' ' and nextChar != ')' and nextChar.isdigit() == False:
-                    newText += char + ' '
-                    index += 1
-                else:
-                    newText += char 
-            case "?":
-                nextChar = text[index+1]
-                if nextChar != '?' and nextChar != '!' and nextChar != ' ' and nextChar != ')':
-                    newText += char + ' '
-                    index += 1
-                else:
-                    newText += char 
-            case "!":
-                nextChar = text[index+1]
-                if nextChar != '!' and nextChar != '?' and nextChar != ' ' and nextChar != ')':
-                    newText += char + ' '
-                    index += 1
-                else:
-                    newText += char 
-            case ":":
-                nextChar = text[index+1]
-                if nextChar != ':' and nextChar != ' ' and nextChar != ')' and nextChar.isdigit() == False:
-                    newText += char + ' '
-                    index += 1
-                else:
-                    newText += char 
-            case ">":
-                #special case for greentext as > represent new line
-                if isGreenText:
-                    nextChar = text[index+1]
-                    newLineAdded == True
-                    if(index >= 2):
-                        newLineAdded = newText.endswith('\n')
-                    if newLineAdded == False:
-                        newText += "\n"
-                        index += 1
-                    if nextChar != '=' and nextChar != ' ':
-                        newText += char + " "
-                        index += 1
-                    else:
-                        newText += char 
-                else:
-                    nextChar = text[index+1]
-                    if nextChar != ':' and nextChar != ' ' and nextChar != ')' and nextChar.isdigit() == False:
-                        newText += char + ' '
-                        index += 1
-                    else:
-                        newText += char
-            case _: newText += char
-    
-    return newText
-
-def releventSearch(game_name):
+def releventSearch(game_name, pick):
     base_url = "https://store.steampowered.com/search/?term="
     search_url = base_url + game_name
 
@@ -171,8 +103,11 @@ def releventSearch(game_name):
 
     # Find game links from search results
     game_links = soup.find_all("a", class_="search_result_row")
-    randomNumber =  random.randrange(0, len(game_links)-1)
-    link = game_links[randomNumber]
+    if(pick == "random"):
+        index =  random.randrange(0, len(game_links)-1)
+    else:
+        index
+    link = game_links[index]
     game_title = link.find("span", class_="title").get_text()
     game_url = link["href"]
     
@@ -208,4 +143,41 @@ def specificSearch(game_name):
         return game_url
         # Extract other information from game_soup
 
+def getTagsLinks(tags):
+    if tags[0] == "none":
+        return ""
+    tagExtension = "tags="
+    for i in range(len(tags)):
+        if tags[i] == "Indie": 
+            tagExtension += "492"
+        elif tags[i] == "Adventure":
+            tagExtension += "21"
+        elif tags[i] == "Singleplayer":
+            tagExtension += "4182"
+        elif tags[i] == "Multiplayer":
+            tagExtension += "3859"
+        elif tags[i] == "Action":
+            tagExtension += "19"
+        elif tags[i] == "Strategy":
+            tagExtension += "9"
+        elif tags[i] == "Casual":
+            tagExtension += "597"
+        elif tags[i] == "Rougelike":
+            tagExtension += "1716"
+        elif tags[i] == "Simulation":
+            tagExtension += "599"
+        elif tags[i] == "FPS":
+            tagExtension += "1663"
+        elif tags[i] == "Puzzle":
+            tagExtension += "1664"
+        elif tags[i] == "Metroidvania":
+            tagExtension += "1628"
+
+        if i == len(tags)-1:
+            tagExtension += "&"
+        else: tagExtension += "%2C"
+
+
+    
+    return tagExtension 
 
