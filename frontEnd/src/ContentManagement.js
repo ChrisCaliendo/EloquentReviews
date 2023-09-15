@@ -1,25 +1,20 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, { useState, createContext } from 'react';
 
 const ConfigContext = createContext();
 
 export const ContentManager = ({ children }) => {
-    const [contentConfig, setContentConfig] = useState({
-
-        useConfig: false,
-        gameTags: [],
+    const [contentConfig, updateContentConfig] = useState({
+        useConfig: true,
+        gameTags: ["none"],
         gameRating: 'Any',
         reviewLength: 50,
         lengthType: ''
-
-    })
+    });
 
     return( 
-        <ConfigContext.Provider value ={{ contentConfig, setContentConfig }}>
+        <ConfigContext.Provider value ={{ contentConfig, updateContentConfig }}>
             {children} 
         </ConfigContext.Provider>         
     );
 }
-
-export const useContentConfig = () => {
-    return useContext(ConfigContext);
-}
+export default ContentManager

@@ -1,11 +1,11 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useContentConfig } from "./ContentManagement";
 import SteamTag from "./SteamTag";
 //import {useSettingsContext} from '../.'
 
 const ContentSettings = () => {
 
-    const { contentConfig, setContentConfig } = useContentConfig()
+    const { contentConfig, updateContentConfig } = useContentConfig()
 
     const [useConfig, setUseConfig] = useState(contentConfig.useConfig)
     const [gameTags, setGameTags] = useState(contentConfig.gameTags)
@@ -14,7 +14,7 @@ const ContentSettings = () => {
     const [lengthType, setLengthType] = useState(contentConfig.lengthType)
 
     const applyContentSettings = () => {
-        setContentConfig({
+        updateContentConfig({
             useConfig: useConfig,
             gameTags: gameTags,
             reviewRating: reviewRating,
@@ -23,6 +23,10 @@ const ContentSettings = () => {
         })
         console.log(contentConfig);
     };
+
+    useEffect(() => {
+        // Use myGlobalState here, as it will reflect the updated value.
+    }, [contentConfig]);
 
     const handleSliderChange = (event) => {
         setReviewLimit(event.target.value);
@@ -33,7 +37,8 @@ const ContentSettings = () => {
     };
 
     const handleToggle = (event) => {
-        setUseConfig(!event.target.value);
+        if(useConfig === false) setUseConfig(true);
+        else setUseConfig(false);
     };
 
     const handleCheckboxChange = (value, isChecked) => {
@@ -104,11 +109,12 @@ const ContentSettings = () => {
 
             <div className="flex 2xl:flex justify-evenly">
             <label className="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" value="" className="sr-only peer"/>
-                <div onChange={handleToggle} className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-black rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-500"></div>
+                <input type="checkbox" onChange={handleToggle} defaultChecked={useConfig} className="sr-only peer"/>
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-black rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-500"></div>
                 <span className="ml-3 text-sm font-medium dark:text-gray-300">Enable Custom Settings</span>
             </label>
 
+            
                 <button onClick={applyContentSettings} type="submit" className="px-2 py-1 font-bold text-gray-700  bg-white rounded hover:bg-gray-300"> Apply Setting </button>
             </div>
 
