@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, useContext, createContext } from 'react';
 
 const ConfigContext = createContext();
 
@@ -11,10 +11,16 @@ export const ContentManager = ({ children }) => {
         lengthType: ''
     });
 
+    const getGlobalData = () => {
+        console.log(contentConfig);
+    }
+
     return( 
-        <ConfigContext.Provider value ={{ contentConfig, updateContentConfig }}>
+        <ConfigContext.Provider value ={{ contentConfig, updateContentConfig, getGlobalData }}>
             {children} 
         </ConfigContext.Provider>         
     );
 }
-export default ContentManager
+export const useContentManager = () => {
+    return useContext(ConfigContext);
+};

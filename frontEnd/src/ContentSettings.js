@@ -1,11 +1,11 @@
 import { useState, useContext, useEffect } from "react";
-import { useContentConfig } from "./ContentManagement";
+import { useContentManager } from "./ContentManagement";
 import SteamTag from "./SteamTag";
 //import {useSettingsContext} from '../.'
 
 const ContentSettings = () => {
 
-    const { contentConfig, updateContentConfig } = useContentConfig()
+    const { contentConfig, updateContentConfig, getGlobalData } = useContentManager()
 
     const [useConfig, setUseConfig] = useState(contentConfig.useConfig)
     const [gameTags, setGameTags] = useState(contentConfig.gameTags)
@@ -21,6 +21,7 @@ const ContentSettings = () => {
             reviewLength: reviewLength,
             lengthType: lengthType
         })
+        getGlobalData();
         console.log(contentConfig);
     };
 

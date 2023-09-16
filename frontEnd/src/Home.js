@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useContentConfig } from './ContentManagement';
+import { useContentManager } from './ContentManagement';
 
 const Home = () => {
 
@@ -14,7 +14,7 @@ const Home = () => {
     const [gameUrl, setGameUrl] = useState("");
     const [searchName, setSearchName] = useState("");
 
-    const { contentConfig } = useContentConfig()
+    const { contentConfig, getGlobalData } = useContentManager()
 
     const getBackendData = async() => {
         const response = await fetch(backendUrl)
@@ -66,6 +66,7 @@ const Home = () => {
     }
 
     const findRandomReview = () => {
+        getGlobalData()
         setLoading(true)
         setError("");
         setMessage("");
