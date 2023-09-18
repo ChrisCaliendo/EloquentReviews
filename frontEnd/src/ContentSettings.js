@@ -127,22 +127,6 @@ const ContentSettings = () => {
                 <button onClick={applyContentSettings} type="submit" className="px-2 py-1 font-bold text-gray-700  bg-white rounded hover:bg-gray-300"> Apply Setting </button>
             </div>
 
-            <div className="m-4">
-                <h1>New settings</h1>
-                {useConfig ? <p> enabled</p> : <p>disabled</p>}
-                {gameTags.length > 0 ? <p>{gameTags}</p> :<p>list empty</p>}
-                <p>{reviewRating}</p>
-                <p>{reviewLength}</p>
-            </div>
-
-            <div className="m-4">
-                <h1>Current settings</h1>
-                {settings.useConfig ? <p> enabled</p> : <p>disabled</p>}
-                {settings.gameTags.length > 0 ? <p>{settings.gameTags}</p> :<p>list empty</p>}
-                <p>{settings.gameRating}</p>
-                <p>{settings.reviewLength}</p>
-            </div>
-
         </div>
     );
 }
