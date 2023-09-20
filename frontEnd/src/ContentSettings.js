@@ -130,7 +130,7 @@ const ContentSettings = () => {
             </label>
 
             
-                <button onClick={applyContentSettings} disabled={isNewSetting === false} type="submit" className="px-2 py-1 font-bold text-gray-700  bg-gray-100 rounded hover:bg-gray-300 disabled:bg-gray-500"> Apply Setting </button>
+                <button onClick={applyContentSettings} disabled={isNewSetting === false} type="submit" className="px-2 py-1 font-bold text-gray-700  bg-gray-200 rounded hover:bg-gray-300 disabled:bg-gray-500"> Apply Setting </button>
             </div>
 
         </div>

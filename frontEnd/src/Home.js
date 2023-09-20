@@ -35,7 +35,7 @@ const Home = () => {
                 'useConfig': settings.useConfig,
                 'gameType': settings.gameType,
                 'reviewLength': settings.reviewLength,
-                'lengthType': settings.lengthType,
+                'reviewRating': settings.reviewRating,
                 'searchName': searchName
             })
         };
