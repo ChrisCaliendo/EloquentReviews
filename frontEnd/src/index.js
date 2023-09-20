@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { ContentManager } from './ContentManagement';
 import { SettingsContextProvider } from './Contexts/SettingsContext';
 
 
@@ -10,9 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <SettingsContextProvider>
-      <ContentManager>
         <App />
-      </ContentManager>
     </SettingsContextProvider>
   </React.StrictMode>
 );

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useContentManager } from './ContentManagement';
 import { useSettingsContext } from './Hooks/UseSettingsContext';
 
 const Home = () => {
@@ -15,24 +14,13 @@ const Home = () => {
     const [gameUrl, setGameUrl] = useState("");
     const [searchName, setSearchName] = useState("");
 
-    const { contentConfig, getGlobalData } = useContentManager()
 
     const {settings, dispatch} = useSettingsContext();
 
-    const getBackendData = async() => {
-        const response = await fetch(backendUrl)
-        const json = await response.json()
-            console.log(json);
-            if (response.ok){
-                console.log(json);
-                
-                setDate(json.reviewDate)
-                setAuthor(json.author)
-                setGame(json.title)
-                setMessage(json.review)
-                setGameUrl(json.gameUrl)
-            }
-    }
+
+    const handleSearchInput = (event) => {
+        setSearchName(event.target.value);
+    };
 
     const sendInfo = async(reviewType) => {
         const requestOptions = {
@@ -44,10 +32,10 @@ const Home = () => {
             body: JSON.stringify({
                 'reviewType': reviewType,
                 'gameUrl': gameUrl,
-                'useConfig': contentConfig.useConfig,
-                'gameType': contentConfig.gameType,
-                'reviewLength': contentConfig.reviewLength,
-                'lengthType': contentConfig.lengthType,
+                'useConfig': settings.useConfig,
+                'gameType': settings.gameType,
+                'reviewLength': settings.reviewLength,
+                'lengthType': settings.lengthType,
                 'searchName': searchName
             })
         };
@@ -69,8 +57,7 @@ const Home = () => {
     }
 
     const findRandomReview = () => {
-        getGlobalData()
-        setLoading(true)
+        setLoading(true);
         setError("");
         setMessage("");
         sendInfo("random");
@@ -90,11 +77,6 @@ const Home = () => {
         sendInfo("search");
     }
 
-    const resetSettings = () => {
-        dispatch({type:'RESET_SETTINGS'})
-        localStorage.removeItem('settings')
-    }
-
     return (  
         <div className="home">
             
@@ -108,13 +90,13 @@ const Home = () => {
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                             </svg>
                         </div>
-                        <input type="search" id="default-search" className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-600 focus:border-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 " placeholder="Enter Name of Game  (( WIP ))" required/>
+                        <input type="search" onChange={handleSearchInput} id="default-search" className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-600 focus:border-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 " placeholder="Enter Name of Game" required/>
                         <br />                
                     </div>
                     <div className="flex justify-evenly">
                         <button title="Finds Review of Random Game" data-te-placement="top" data-te-toggle="tooltip" onClick={findRandomReview} className="px-4 py-2 font-bold text-gray-700  bg-white rounded hover:bg-gray-300">Find Random Review</button>
                         <button title="Finds Review From The Same Game as Previous Review" data-te-placement="top" data-te-toggle="tooltip" onClick={findSimilarReview} disabled={!game} className="px-4 py-2 font-bold text-gray-700 bg-white rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">Find Similar Review</button>
-                        <button title="Finds Review From Game Entered in Search" data-te-placement="top" data-te-toggle="tooltip" onClick={findSearchReview} disabled={!game} className="px-4 py-2 font-bold text-gray-700 bg-white rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">Find Search Review</button>
+                        <button title="Finds Review From Game Entered in Search" data-te-placement="top" data-te-toggle="tooltip" onClick={findSearchReview} disabled={!searchName} className="px-4 py-2 font-bold text-gray-700 bg-white rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">Find Search Review</button>
                     </div>
                 <br />
                 <div className="border border-none shadow rounded-md p-5 max-w-2xl w-full mx-auto px-3 py-2 text-white bg-zinc-900">
@@ -150,18 +132,6 @@ const Home = () => {
                         <br />
                     </div>
                 }
-                {settings &&
-                    (
-                        <div className="m-4">
-                            <h1>Current settings</h1>
-                            {settings.useConfig ? <p> enabled</p> : <p>disabled</p>}
-                            {settings.gameTags.length > 0 ? <p>{settings.gameTags}</p> :<p>list empty</p>}
-                            <p>{settings.gameRating}</p>
-                            <p>{settings.reviewLength}</p>
-                        </div>
-                    )
-                }
-                    <button onClick={resetSettings} className='p-3 bg-white border-4 text-black rounded-xl hover:bg-black hover:border-white hover:text-white'>Reset</button>
                 </div>
                 </div>
             </div>
