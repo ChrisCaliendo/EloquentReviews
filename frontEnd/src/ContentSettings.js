@@ -116,7 +116,7 @@ const ContentSettings = () => {
             <h3 className="mb-8 font-semibold">How Short Do You Want Your Reviews?</h3>
 
             <label className="block mb-2 text-sm font-bold  text-white">Review Length:</label>
-            <label className="block mb-2 text-sm font-medium  text-white">{!useConfig && <div>Unlimited Word Length</div>}{useConfig && <div>{reviewLength} Words Long</div>}</label>
+            <label className="block mb-2 text-sm font-medium  text-white"> {useConfig ? <div>{reviewLength} Words Long</div> : <div>Unlimited Word Length</div>} </label>
             <input id="minmax-range" type="range" min="0" max="100" value={reviewLength} disabled={!useConfig} onChange={handleSliderChange} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"/>
 
             <br />
@@ -126,7 +126,7 @@ const ContentSettings = () => {
             <label className="relative inline-flex items-center cursor-pointer">
                 <input type="checkbox" onChange={handleToggle} defaultChecked={useConfig}  className="sr-only peer"/>
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-black rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-500"></div>
-                <span className="ml-3 text-sm font-medium dark:text-gray-300">{!useConfig && "Enable"}{useConfig && "Disable"} Review Content Parameters</span>
+                <span className="ml-3 text-sm font-medium dark:text-gray-300">{useConfig ? "Disable" : "Enable"} Review Content Parameters</span>
             </label>
 
             
