@@ -10,6 +10,7 @@ views = Blueprint('view', __name__)
 def scrape():
     frontEndData = request.json
     rating = frontEndData['reviewRating']
+    
     if(rating=="Any"):
         rating = "reviews"
     elif(rating=="Positive"):
@@ -21,13 +22,13 @@ def scrape():
     
     rating = frontEndData['gameTags']
     if frontEndData['reviewType'] == "random":
-        data = getRandomReview(rating)
+        data = getRandomReview(frontEndData['gameTags'], rating, frontEndData['useConfig'], frontEndData['reviewLength'])
     elif frontEndData['reviewType'] == "similar":
-        data = getSimilarReview(frontEndData['gameUrl'], rating)
+        data = getSimilarReview(frontEndData['gameUrl'], rating, frontEndData['useConfig'], frontEndData['reviewLength'])
     elif frontEndData['reviewType'] == "search":
-        data = getCustomReview(frontEndData['gameUrl'], rating)
+        data = getCustomReview(frontEndData['searchName'], rating, frontEndData['useConfig'], frontEndData['reviewLength'])
     else: 
-        data = getRandomReview(rating)
+        data = getRandomReview([], rating, False, "")
     #print(data['review'])
     return jsonify(data)
 

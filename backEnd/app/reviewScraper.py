@@ -8,22 +8,24 @@ from flask import Blueprint, request, jsonify
 
 gameUrl = "none"
 
-def getRandomReview():
+def getRandomReview(gameTags, rating, useConfig, reviewLength):
     #gameUrl = findGame(topSellingURL)
-    gameUrl = releventSearch("", "random")
-    data = getReviews(gameUrl)
+    gameUrl = releventSearch("", "random", gameTags)
+    if(isinstance(gameUrl, str)):
+        data = getReviews(gameUrl, rating, useConfig, reviewLength)
     
     return data
 
-def getCustomReview(searchTerm):
+def getCustomReview(searchTerm, rating, useConfig, reviewLength):
     #gameUrl = findGame(topSellingURL)
-    gameUrl = releventSearch(searchTerm, "percise")
-    data = getReviews(gameUrl)
+    gameUrl = releventSearch(searchTerm, "percise", [])
+    if(isinstance(gameUrl, str)):
+        data = getReviews(gameUrl, rating, useConfig, reviewLength)
     
     return data
 
-def getSimilarReview(similarUrl):
-    data = getReviews(similarUrl)
+def getSimilarReview(similarUrl, rating, useConfig, reviewLength):
+    data = getReviews(similarUrl, rating, useConfig, reviewLength)
     return data
 
 def findGame(url):
@@ -40,7 +42,7 @@ def findGame(url):
     newGameUrl = len(games)
     return subElement
 
-def getReviews(url, rating):
+def getReviews(url, rating, useConfig, reqLength):
     cookies = {'birthtime': '568022401'}
     response = requests.get(url, cookies=cookies)
     soup = BeautifulSoup(response.content, "html.parser")
@@ -48,29 +50,41 @@ def getReviews(url, rating):
     gameImage = soup.find("img", class_="game_header_image_full")['src']
     temp = url.split('/')
     gameCode = temp[4]
-    funnyReviewSite = "https://steamcommunity.com/app/"+gameCode+"/reviews/?browsefilter=funny&snr=1_5_100010_&p=1"
+    funnyReviewSite = "https://steamcommunity.com/app/"+gameCode+"/"+rating+"/?browsefilter=funny&snr=1_5_100010_&p=1"
     response = requests.get(funnyReviewSite, cookies=cookies)
     soup = BeautifulSoup(response.content, "html.parser")
     allReviews = soup.find_all("div", class_="apphub_Card modalContentLink interactable")
-    randomNumber =  random.randrange(0, len(allReviews)-1)
+    numOfReviews = len(allReviews)
+    reviewData = ""
+    reviewText = ""
+    index = -1
+    if(useConfig):
+        inputNumbers =range(0,numOfReviews-1)
+        indexes = random.sample(inputNumbers, numOfReviews)
+        while(index == numOfReviews-1):
+            index = index + 1
+            reviewData = allReviews[indexes[index]]
+            review = reviewData.find("div", class_="apphub_CardTextContent")
+            reviewText = processText(review)
+            spaces = reviewText.count(' ')
+            tabs = reviewText.count('\t')
+            newlines = reviewText.count('\n')
+            if(reqLength > spaces+tabs+newlines):
+                useConfig = False
+                break;
+        if(useConfig):
+            return {'errorMessage': "No review can be found which meets your requirements"}
+    else:   
+        index =  random.randrange(0, numOfReviews-1)
+        reviewText = processText()
+    
     #print(allReviews[randomNumber].find("div", class_="apphub_CardTextContent"))
 
     #Getting review date
-    reviewData = allReviews[randomNumber]
-    review = reviewData.find("div", class_="apphub_CardTextContent")
     reviewDate = review.find("div", class_="date_posted").text[8:]
     if reviewDate[len(reviewDate)-3] == ' '  or reviewDate[len(reviewDate)-2] == ' ': 
         reviewDate = reviewDate+", "+str(datetime.date.today().year)
-
-    #Getting review text
-    reviewText = ""
-    for element in review:
-        if element.name != "div":
-            reviewText += element.text
-        elif element.name != "br":
-            reviewText += "\n"
-    #reviewText = processText(reviewText)
-
+    
     #Getting authors name
     try:
         author = reviewData.find("div", class_="apphub_CardContentAuthorName offline ellipsis").text
@@ -81,7 +95,7 @@ def getReviews(url, rating):
     data = {
         'title': gameTitle,
         'picture': gameImage,
-        'numOfReview': len(allReviews),
+        'numOfReview': numOfReviews,
         'reviewDate' : reviewDate,
         'review': reviewText.lstrip(),
         'author': author,
@@ -95,10 +109,7 @@ def releventSearch(game_name, pick, tags):
     if(tagExtension=="" and game_name != ""):
         game_name = null
         
-    base_url = "https://store.steampowered.com/search/?term="
-    
-    search_url = base_url + game_name
-    search_url = base_url + tagExtension
+    base_url = "https://store.steampowered.com/search/?"+tagExtension+"term="+game_name
 
     response = requests.get(search_url)
     soup = BeautifulSoup(response.content, "html.parser")
@@ -123,8 +134,17 @@ def releventSearch(game_name, pick, tags):
     return game_url
     # Extract other information from game_soup
 
+def processText(review):
+    #Getting review text
+    reviewText = ""
+    for element in review:
+        if element.name != "div":
+            reviewText += element.text
+        elif element.name != "br":
+            reviewText += "\n"
+    return reviewText
+
 def specificSearch(game_name, tags):
-    
     base_url = "https://store.steampowered.com/search/?term="
     
 

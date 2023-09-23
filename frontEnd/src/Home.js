@@ -33,7 +33,7 @@ const Home = () => {
                 'reviewType': reviewType,
                 'gameUrl': gameUrl,
                 'useConfig': settings.useConfig,
-                'gameType': settings.gameType,
+                'gameTags': settings.gameTags,
                 'reviewLength': settings.reviewLength,
                 'reviewRating': settings.reviewRating,
                 'searchName': searchName
@@ -42,19 +42,26 @@ const Home = () => {
 
         const response = await fetch(backendUrl, requestOptions);
         const json = await response.json().catch(setError("Please Try Again"));
-        if (response.ok)
-        {
-            console.log(json);
+        if(response.ok){
+            if(json.errorMessage != null)
+            {
+                setError(json.errorMessage);
+            }
+            else 
+            {
+                console.log(json);
             
-            setError("");
-            setDate(json.reviewDate)
-            setAuthor(json.author)
-            setGame(json.title)
-            setMessage(json.review)
-            setGameUrl(json.gameUrl)
+                setError("");
+                setDate(json.reviewDate)
+                setAuthor(json.author)
+                setGame(json.title)
+                setMessage(json.review)
+                setGameUrl(json.gameUrl)
+            }
+            setLoading(false)
         }
-        setLoading(false)
-    }
+        }
+        
 
     const findRandomReview = () => {
         setLoading(true);
