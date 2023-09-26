@@ -11,9 +11,9 @@ export const settingsReducer = (state,action) => {
         case 'RESET_SETTINGS':
             return{
                 settings:{
-                    useconfig:true,
+                    useConfig:false,
                     gameTags: [],
-                    gameRating: 'Any',
+                    reviewRating: 'Any',
                     reviewLength: 50,
                 }
             }
@@ -25,9 +25,9 @@ export const settingsReducer = (state,action) => {
 export const SettingsContextProvider = ({children}) => {
     const[state,dispatch] = useReducer(settingsReducer, {
         settings:{
-            useconfig:true,
+            useconfig:false,
             gameTags: [],
-            gameRating: 'Any',
+            reviewRating: 'Any',
             reviewLength: 50,
         }
     })
@@ -44,8 +44,6 @@ export const SettingsContextProvider = ({children}) => {
         }
         setLoading(false);
     }, []);
-
-    console.log("SettingsContext state:", state);
 
     if (loading) {
         return <div>Loading...</div>;

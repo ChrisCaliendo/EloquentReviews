@@ -9,7 +9,7 @@ const ContentSettings = () => {
 
     const [useConfig, setUseConfig] = useState(settings.useConfig)
     const [gameTags, setGameTags] = useState(settings.gameTags)
-    const [reviewRating, setRating] = useState(settings.gameRating)
+    const [reviewRating, setRating] = useState(settings.reviewRating)
     const [reviewLength, setReviewLimit] = useState(settings.reviewLength) //from 30 to 250
 
     const [isNewSetting, setIsNewSetting] = useState(false)
@@ -52,7 +52,7 @@ const ContentSettings = () => {
         else {
             setGameTags(gameTags.filter(item => item !== value));
         }
-        console.log(gameTags)
+        
         setIsNewSetting(true);
     };
 
@@ -83,7 +83,7 @@ const ContentSettings = () => {
                 <SteamTag onChange={handleCheckboxChange} checkCondition={ gameTags } tagName="Metroidvania" />
                 
             </div>
-            <hr class="h-px my-6 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+            <hr className="h-px my-6 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 
             <div onChange={handleRatingChange}>
                 <h1 className="mb-1 font-bold text-2xl text-gray-200">General Search Ratings</h1>
@@ -110,7 +110,7 @@ const ContentSettings = () => {
                 </ul>
             </div>
             <br />
-            <hr class="h-px my-6 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+            <hr className="h-px my-6 bg-gray-200 border-0 dark:bg-gray-700"></hr>
             
             <h1 className="mb-1 font-bold text-2xl text-gray-200">Review Content Parameters</h1>
             <h3 className="mb-8 font-semibold">How Short Do You Want Your Reviews?</h3>

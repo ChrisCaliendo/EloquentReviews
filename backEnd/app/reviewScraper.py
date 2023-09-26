@@ -109,20 +109,23 @@ def releventSearch(game_name, pick, tags):
     if(tagExtension=="" and game_name != ""):
         game_name = null
         
-    base_url = "https://store.steampowered.com/search/?"+tagExtension+"term="+game_name
+    search_url = "https://store.steampowered.com/search/?"+tagExtension+"term="+game_name
 
     response = requests.get(search_url)
     soup = BeautifulSoup(response.content, "html.parser")
 
     # Find game links from search results
-    game_links = soup.find_all("a", class_="search_result_row")
+    
 
     index = 1
     if(pick == "random"):
         index = random.randrange(0, len(game_links)-1)
 
-    link = game_links[index]
-    game_title = link.find("span", class_="title").get_text()
+    try:
+        game_links = soup.find_all("a", class_="search_result_row")
+        link = game_links[index]
+    except:
+        return {'errorMessage': "No game can be found which meets your requirements"}
     game_url = link["href"]
     
     # Send request to individual game page
@@ -143,29 +146,6 @@ def processText(review):
         elif element.name != "br":
             reviewText += "\n"
     return reviewText
-
-def specificSearch(game_name, tags):
-    base_url = "https://store.steampowered.com/search/?term="
-    
-
-    response = requests.get(search_url)
-    soup = BeautifulSoup(response.content, "html.parser")
-
-    # Find game links from search results
-    game_links = soup.find_all("a", class_="search_result_row")
-    #print(len(game_links)+696900000000000)
-    for link in game_links:
-        game_title = link.find("span", class_="title").get_text()
-        game_url = link["href"]
-        
-        # Send request to individual game page
-        game_response = requests.get(game_url)
-        game_soup = BeautifulSoup(game_response.content, "html.parser")
-        
-        # Extract and print information from the game page
-        # Modify this part to scrape the specific information you need
-        return game_url
-        # Extract other information from game_soup
 
 def getTagsLinks(tags):
 
