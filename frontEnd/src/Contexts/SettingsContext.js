@@ -25,7 +25,7 @@ export const settingsReducer = (state,action) => {
 export const SettingsContextProvider = ({children}) => {
     const[state,dispatch] = useReducer(settingsReducer, {
         settings:{
-            useconfig:false,
+            useConfig:false,
             gameTags: [],
             reviewRating: 'Any',
             reviewLength: 50,

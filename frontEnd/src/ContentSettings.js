@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import SteamTag from "./SteamTag";
+import SteamTag from "./Components/SteamTag";
 import { useSettingsContext } from "./Hooks/UseSettingsContext";
 //import {useSettingsContext} from '../.'
 
@@ -22,7 +22,7 @@ const ContentSettings = () => {
             reviewRating: reviewRating,
             reviewLength: reviewLength,
         }
-        
+        console.log(newSettings)
         dispatch({type:'SET_SETTINGS', payload:newSettings})
         localStorage.setItem('settings', JSON.stringify(newSettings))
         setIsNewSetting(false);
@@ -54,6 +54,7 @@ const ContentSettings = () => {
         }
         
         setIsNewSetting(true);
+        console.log(isChecked);
     };
 
     const resetSettings = () => {

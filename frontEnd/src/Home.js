@@ -15,7 +15,7 @@ const Home = () => {
     const [searchName, setSearchName] = useState("");
 
 
-    const {settings, dispatch} = useSettingsContext();
+    const {settings} = useSettingsContext();
 
 
     const handleSearchInput = (event) => {
