@@ -4,7 +4,7 @@ import { useSettingsContext } from './Hooks/UseSettingsContext';
 
 const Home = () => {
 
-    const backendUrl = `http://localhost:5000/scrape`//`http://localhost:5000/scrape`//`https://eloquent-review-scraper.onrender.com/scrape`
+    const backendUrl = `https://eloquent-review-scraper.onrender.com/scrape`//`http://localhost:5000/scrape`//`https://eloquent-review-scraper.onrender.com/scrape`
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
