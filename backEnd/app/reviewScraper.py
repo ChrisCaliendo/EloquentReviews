@@ -96,7 +96,7 @@ def getReviews(url, rating, useConfig, reqLength):
         index =  random.randrange(0, (numOfReviews-1) )
         reviewData = allReviews[index]
         review = reviewData.find("div", class_="apphub_CardTextContent")
-        reviewText = processText(review)
+        reviewText = processText(review).lstrip()
     
     #print(allReviews[randomNumber].find("div", class_="apphub_CardTextContent"))
 
