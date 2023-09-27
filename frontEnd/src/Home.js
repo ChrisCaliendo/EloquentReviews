@@ -39,7 +39,7 @@ const Home = () => {
                 'searchName': searchName
             })
         };
-
+        console.log(requestOptions);
         const response = await fetch(backendUrl, requestOptions);
         const json = await response.json().catch(setError("Please Try Again"));
         if(response.ok){

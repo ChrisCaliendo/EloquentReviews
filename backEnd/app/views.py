@@ -20,7 +20,7 @@ def scrape():
     else: 
         rating = "reviews"
     
-    rating = frontEndData['gameTags']
+    
     if frontEndData['reviewType'] == "random":
         data = getRandomReview(frontEndData['gameTags'], rating, frontEndData['useConfig'], frontEndData['reviewLength'])
     elif frontEndData['reviewType'] == "similar":
