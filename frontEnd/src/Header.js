@@ -16,10 +16,7 @@ const Header = () => {
                 <li>
                     <a href="/content_settings" className="px-3 py-2 font-bold text-white hover:text-gray-500">Content Settings</a>
                 </li>
-                <li>
-                    <a href="/display_settings" className="px-3 py-2 font-bold text-white hover:text-gray-500">Display Settings</a>
-                    <span className="bg-indigo-100 text-indigo-800 text-xs font-bold mr-2 px-2 py-0.5 rounded-full dark:bg-indigo-900 dark:text-indigo-300">WIP</span>
-                </li>
+                
                 </ul>
                 
             </div>
