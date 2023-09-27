@@ -1,7 +1,7 @@
 import { useState } from "react";
 const SteamTag = ({ tagName , onChange, checkCondition }) => {
 
-    const [isChecked, setIsChecked] = useState(checkCondition.includes(tagName) );
+    const [isChecked, setIsChecked] = useState(checkCondition.includes(tagName));
 
     const handleCheckboxChange = (event) => {
         setIsChecked(!isChecked);

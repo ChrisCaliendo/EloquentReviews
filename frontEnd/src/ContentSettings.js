@@ -22,7 +22,7 @@ const ContentSettings = () => {
             reviewRating: reviewRating,
             reviewLength: reviewLength,
         }
-        console.log(newSettings)
+        
         dispatch({type:'SET_SETTINGS', payload:newSettings})
         localStorage.setItem('settings', JSON.stringify(newSettings))
         setIsNewSetting(false);
@@ -54,7 +54,7 @@ const ContentSettings = () => {
         }
         
         setIsNewSetting(true);
-        console.log(isChecked);
+        
     };
 
     const resetSettings = () => {

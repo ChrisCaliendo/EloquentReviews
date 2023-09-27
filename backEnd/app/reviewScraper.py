@@ -26,10 +26,9 @@ def getRandomReview(gameTags, rating, useConfig, reviewLength):
 def getCustomReview(searchTerm, rating, useConfig, reviewLength):
     #gameUrl = findGame(topSellingURL)
     gameUrl = releventSearch(searchTerm, "percise", [])
-    print(gameUrl)
+    
     if("errorMessage" in gameUrl):
         return gameUrl
-    
     else:
         return getReviews(gameUrl, rating, useConfig, reviewLength)
     
@@ -47,7 +46,7 @@ def findGame(url):
     games = subElement.find_all("div", attrs={'class':'steamchartsshell_SteamChartsShell_2rArj'})
     
     #randomNumber =  random.randrange(0,len(games),1)
-    #print(randomNumber, "but")
+    
     #parent = games[randomNumber].parent
     #gameUrl = parent.find("href")
     newGameUrl = len(games)
@@ -57,13 +56,13 @@ def getReviews(url, rating, useConfig, reqLength):
     cookies = {'birthtime': '568022401'}
     response = requests.get(url, cookies=cookies)
     soup = BeautifulSoup(response.content, "html.parser")
-    print(url)
+    
     gameImage = soup.find("img", class_="game_header_image_full")['src']
     gameTitle = soup.find("div", class_="apphub_AppName").text
     
     temp = url.split('/')
     gameCode = temp[4]
-    print(rating)
+    
     funnyReviewSite = "https://steamcommunity.com/app/"+gameCode+"/"+rating+"/?browsefilter=funny&snr=1_5_100010_&p=1"
     response = requests.get(funnyReviewSite, cookies=cookies)
     soup = BeautifulSoup(response.content, "html.parser")
@@ -86,7 +85,6 @@ def getReviews(url, rating, useConfig, reqLength):
             spaces = reviewText.count(' ')
             tabs = reviewText.count('\t')
             newlines = reviewText.count('\n')
-            print(spaces+tabs+newlines)
             if(int(reqLength) > spaces+tabs+newlines):
                 useConfig = False
                 break;
@@ -98,7 +96,6 @@ def getReviews(url, rating, useConfig, reqLength):
         review = reviewData.find("div", class_="apphub_CardTextContent")
         reviewText = processText(review).lstrip()
     
-    #print(allReviews[randomNumber].find("div", class_="apphub_CardTextContent"))
 
     #Getting review date
     reviewDate = review.find("div", class_="date_posted").text[8:]
@@ -110,8 +107,8 @@ def getReviews(url, rating, useConfig, reqLength):
         author = reviewData.find("div", class_="apphub_CardContentAuthorName offline ellipsis").text
     except:
         author = "an Anonymous Genius"
-    #print(reviewData)
-    print(reviewText)
+    
+    
     data = {
         'title': gameTitle,
         'picture': gameImage,
