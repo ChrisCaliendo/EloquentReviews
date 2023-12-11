@@ -35,15 +35,15 @@ https://github.com/ChrisCaliendo/EloquentReviews/assets/90165610/b5ef5244-f8a2-4
 These settings allow for the user to find reviews with specific content requirements or from games with specific tags. There are currently 3 types of content settings available to the user to adjust the output of the review finder.
 
 
-###Random Search Tags
+### Random Search Tags
 A list of tags that the user can use to restrict the types of games reviews are taken from at random. This doesnt affect the "Find Search Review" function as that is based on the given name in the search bar to avoid confusion.
 
 
-###General Search Ratings
+### General Search Ratings
 Allows the user to decide whether they want to see only positive reviews or negative reviews. This affects the oputput of all main search functions
 
 
-###Review Content Parameters
+### Review Content Parameters
 Allows the user to deside how long they want the reviews they search for to be whether they want short statements no longer than a phrase or a paragraph. Has a toggle for the user to deside where they want this parameter active or not.
 
 
