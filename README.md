@@ -25,9 +25,32 @@ Finds another funny review from thesame game as the last found. Requires at leas
 https://github.com/ChrisCaliendo/EloquentReviews/assets/90165610/c3534452-3f08-4fd1-b3a1-9eec5909bc7c
 
 
+### Find Search Review
+Finds a review from the top funniest rated reviews of the top most relevant games on the Steam platform
 
-## Future Plans
-1. Content settings
-2. Display Settings
+https://github.com/ChrisCaliendo/EloquentReviews/assets/90165610/b5ef5244-f8a2-4db1-8e68-18d2bf4df0f3
+
+
+
+## Content Settings
+These settings allow for the user to find reviews with specific content requirements or from games with specific tags. There are currently 3 types of content settings available to the user to adjust the output of the review finder.
+
+
+###Random Search Tags
+A list of tags that the user can use to restrict the types of games reviews are taken from at random. This doesnt affect the "Find Search Review" function as that is based on the given name in the search bar to avoid confusion.
+
+
+###General Search Ratings
+Allows the user to decide whether they want to see only positive reviews or negative reviews. This affects the oputput of all main search functions
+
+
+###Review Content Parameters
+Allows the user to deside how long they want the reviews they search for to be whether they want short statements no longer than a phrase or a paragraph. Has a toggle for the user to deside where they want this parameter active or not.
+
+
+
+
+
+
 
 
