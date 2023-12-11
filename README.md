@@ -16,20 +16,19 @@ The main function of finding reviews is mainly controlled in the Home page. Ther
 ### Find Random Review
 Finds a review from the top funniest rated reviews of the top most relevant games on the Steam platform
 
-https://github.com/ChrisCaliendo/EloquentReviews/assets/90165610/0fe4d512-8284-463c-939e-00e921cdb11b
+https://github.com/ChrisCaliendo/EloquentReviews/assets/90165610/1e62aab9-9021-4eed-b98c-5d7310c28a94
 
 
 ### Find Similar Review
 Finds another funny review from thesame game as the last found. Requires at least one game to have been previously found
 
-https://github.com/ChrisCaliendo/EloquentReviews/assets/90165610/c3534452-3f08-4fd1-b3a1-9eec5909bc7c
+https://github.com/ChrisCaliendo/EloquentReviews/assets/90165610/8b90994c-e409-49a7-bb15-40585fcde674
 
 
 ### Find Search Review
 Finds a review from the top funniest rated reviews of the top most relevant games on the Steam platform
 
 https://github.com/ChrisCaliendo/EloquentReviews/assets/90165610/b5ef5244-f8a2-4db1-8e68-18d2bf4df0f3
-
 
 
 ## Content Settings
