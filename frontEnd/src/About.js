@@ -9,7 +9,7 @@ const About = () => {
                 control how the reviews are displayed once found.
             </p>
             <br />
-            <h1>Functions</h1>
+            <h1>Home Functions</h1>
             <p className="text-left text-white dark:text-gray-400">
                 The main function of finding reviews is mainly controlled in the Home page. There are currently 3 options in 
                 using the search and scrape algorithm. The Find Random, Similar and Search Review buttons. CAUTION: Using the site for 
@@ -44,16 +44,19 @@ const About = () => {
                 This doesnt affect the "Find Search Review" function as that is based on the given name in the search 
                 bar to avoid confusion.
             </p>
+            <br />
             <h2 className="text-left text-white dark:text-gray-300">General Search Ratings</h2>
             <p className="text-left text-white dark:text-gray-400">
                 Allows the user to decide whether they want to see only positive reviews or negative reviews.
             </p>
+            <br />
             <h2 className="text-left text-white dark:text-gray-300">Review Content Parameters</h2>
             <p className="text-left text-white dark:text-gray-400">
                 Allows the user to deside how long they want the reviews they search for to be whether they want short 
                 statements no longer than a phrase or a paragraph. Has a toggle for the user to deside where they want 
                 this parameter active or not.
             </p>
+            <br />
         </div>
     );
 }
