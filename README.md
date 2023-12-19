@@ -1,6 +1,8 @@
 # EloquentReviews
 This website is used for finding funny reviews off of the video game distribution and purchasing platform Steam. This website is still in development and more functionality will be added relatively soon including custom game searching, being able to find specific kinds of reviews based on keywords or catagories and advanced options to control how the reviews are displayed once found.
 
+Deployment: https://eloquent-reviews.vercel.app
+
 ## Languages, Libraries and Resources Used
 * React
 * JavaScript
