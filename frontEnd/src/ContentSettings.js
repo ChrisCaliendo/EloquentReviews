@@ -102,7 +102,7 @@ const ContentSettings = () => {
                             <label className="w-full py-3 ml-2 text-sm font-bold text-gray-900  ">Postive</label>
                         </div>
                     </li>
-                    <li className="w-full rounded-r-xl border-b  border-gray-200 bg-red-300 sm:border-b-0 sm:border-r dark:border-gray-600">
+                    <li className="w-full sm:rounded-r-xl sm:rounded-bl-none rounded-tr-none rounded-b-xl border-b  border-gray-200 bg-red-300 sm:border-b-0 sm:border-r dark:border-gray-600">
                         <div className="flex items-center pl-3 ">
                             <input id="horizontal-list-radio-millitary" type="radio" value="Negative" name="rating-input" defaultChecked={ reviewRating === "Negative" } className="w-4 h-4 text-gray-600 bg-gray-100  border-gray-300 focus:ring-gray-500 dark:focus:ring-gray-600 accent-gray-900 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
                             <label className="w-full py-3 ml-2 text-sm font-bold text-gray-900 accent-gray-800 ">Negative</label>

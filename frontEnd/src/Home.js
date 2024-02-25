@@ -100,9 +100,9 @@ const Home = () => {
                         <br />                
                     </div>
                     <div className="flex justify-evenly">
-                        <button title="Finds Review of Random Game" data-te-placement="top" data-te-toggle="tooltip" onClick={findRandomReview} className="px-4 py-2 font-bold text-gray-700  bg-white rounded hover:bg-gray-300">Find Random Review</button>
-                        <button title="Finds Review From The Same Game as Previous Review" data-te-placement="top" data-te-toggle="tooltip" onClick={findSimilarReview} disabled={!game} className="px-4 py-2 font-bold text-gray-700 bg-white rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">Find Similar Review</button>
-                        <button title="Finds Review From Game Entered in Search" data-te-placement="top" data-te-toggle="tooltip" onClick={findSearchReview} disabled={!searchName} className="px-4 py-2 font-bold text-gray-700 bg-white rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">Find Search Review</button>
+                        <button title="Finds Review of Random Game" data-te-placement="top" data-te-toggle="tooltip" onClick={findRandomReview} className="md:px-4 m-2 py-2 font-bold text-gray-700  bg-white rounded hover:bg-gray-300">Find Random Review</button>
+                        <button title="Finds Review From The Same Game as Previous Review" data-te-placement="top" data-te-toggle="tooltip" onClick={findSimilarReview} disabled={!game} className="px-2 py-2 m-2 font-bold text-gray-700 bg-white rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">Find Similar Review</button>
+                        <button title="Finds Review From Game Entered in Search" data-te-placement="top" data-te-toggle="tooltip" onClick={findSearchReview} disabled={!searchName} className="px-2 py-2 m-2 font-bold text-gray-700 bg-white rounded hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">Find Search Review</button>
                     </div>
                 <br />
                 <div className="border border-none shadow rounded-md p-5 max-w-2xl w-full mx-auto px-3 py-2 text-white bg-zinc-900">
